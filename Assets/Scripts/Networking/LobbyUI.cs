@@ -104,8 +104,22 @@ public class LobbyUI : MonoBehaviour {
 
 
         //}
-        lobbyStatus = LobbyStatusList.LoadGame;
-        UpdateUIMode();
+
+        Debug.Log(string.Format("ip {0}  port {1}", strIPAddress, intPort));
+
+        if (NetManager.singleton == null)
+        {
+            Debug.Log("NetManager.singleton is null");
+        }
+        else
+        {
+            NetManager.singleton.networkAddress = strIPAddress;
+            NetManager.singleton.networkPort = intPort;
+            NetManager.singleton.StartClient();
+
+            lobbyStatus = LobbyStatusList.LoadGame;
+            UpdateUIMode();
+        }
     }
 
 

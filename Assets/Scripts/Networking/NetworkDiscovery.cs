@@ -321,9 +321,9 @@ namespace Core.Networking
             {
                 NetworkTransport.Init();
             }
-            if (this.m_UseNetworkManager && NetManager.instance != null)
+            if (this.m_UseNetworkManager && NetManager.singleton != null)
             {
-                this.m_BroadcastData = string.Concat(new object[] { "CoreNetMgr:", NetManager.instance.networkPort, ":", NetManager.instance.networkPort});
+                this.m_BroadcastData = string.Concat(new object[] { "CoreNetMgr:", NetManager.singleton.networkPort, ":", NetManager.singleton.networkPort});
                 if (LogFilter.logInfo)
                 {
                     Debug.Log(string.Concat("NetworkDiscovery set broadbast data to:", this.m_BroadcastData));
@@ -515,7 +515,7 @@ namespace Core.Networking
             }
 
             //Now that our server info is being broadcasted out over the network, we should start listening for connections
-            NetManager.instance.StartServer();
+            NetManager.singleton.StartServer();
 
             this.m_Running = true;
             this.m_IsServer = true;

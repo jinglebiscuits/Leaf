@@ -8,11 +8,6 @@ using UnityEngine.Networking;
 
 public class NetManager : NetworkManager
 {
-    public static NetManager instance = null;
 
-    void Awake()
-    {
-        NetManager.instance = this;
-    }
 }
 
