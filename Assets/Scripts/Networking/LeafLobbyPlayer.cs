@@ -7,15 +7,7 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
 
     public Button btnReady; 
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        Debug.Log("OnStartClient");
-        btnReady = GetComponent<Button>();
-    }
+ 
 
     /// <summary>
     /// 
@@ -23,7 +15,7 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
     public override void OnClientEnterLobby()
     {
         base.OnClientEnterLobby();
-        Debug.Log("OnClientEnterLobby()");
+        Debug.Log(string.Format("OnClientEnterLobby() - local {0}  - slot {1}", isLocalPlayer.ToString(),  slot.ToString()));
         LobbyUI.instace.AddPlayerToLobby(this);
         if (isLocalPlayer)
         {
@@ -38,14 +30,28 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
     /// <summary>
     /// 
     /// </summary>
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        Debug.Log(string.Format("OnStartClient() - local {0}  - slot {1}", isLocalPlayer.ToString(), slot.ToString()));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     void SetupLocalPlayer()
     {
+        Debug.Log("SetupLocalPlayer()");
         btnReady.interactable = true;
         OnClientReady(false);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     void SetupRemotePlayer()
     {
+        Debug.Log("SetupRemotePlayer");
         btnReady.interactable = false;
     }
 
@@ -54,6 +60,8 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
     /// </summary>
     public void ReadyButtonClickHandler()
     {
+        Debug.Log(string.Format("ReadyButtonClickHandler() - local {0}  - slot {1}", isLocalPlayer.ToString(), slot.ToString()));
+
         //send the ready message back to the server
         SendReadyToBeginMessage();
     }
@@ -64,7 +72,7 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
     /// <param name="readyState"></param>
     public override void OnClientReady(bool readyState)
     {
-        Debug.Log(string.Format("OnClientReady() readyState = {0}  ", readyState.ToString()));
+        Debug.Log(string.Format("OnClientReady() readyState = {0} - local {1}  - slot {2}  ", readyState.ToString(), isLocalPlayer.ToString(), slot.ToString()));
         if (readyState)
         {
             //ChangeReadyButtonColor(TransparentColor);
@@ -85,6 +93,6 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
         }
     }
 
-
+   
 
 }

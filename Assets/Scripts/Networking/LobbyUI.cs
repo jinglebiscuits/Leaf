@@ -67,6 +67,7 @@ public class LobbyUI : MonoBehaviour {
 
         discovery.Initialize();
         lobbyStatus = LobbyStatusList.SelectHostOrClient;
+        UpdateUIMode();
     }
 
     #region "Host"
@@ -152,7 +153,7 @@ public class LobbyUI : MonoBehaviour {
     public void HostSelected(string strIPAddress, int intPort)
     {
         System.Net.IPAddress ip = System.Net.IPAddress.Parse(strIPAddress);
-        Debug.Log(string.Format("ip {0}  port {1}", strIPAddress, intPort));
+        Debug.Log(string.Format("HostSelected() - ip {0}  port {1}", strIPAddress, intPort));
 
         lobbyManager.networkAddress = strIPAddress;
         lobbyManager.StartClient();
