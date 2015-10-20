@@ -5,9 +5,17 @@ using System.Collections;
 
 public class LeafLobbyPlayer : NetworkLobbyPlayer {
 
-    public Button btnReady; 
+    public Button btnReady;
 
- 
+    private bool setUpPlayerDone = false;
+
+    void Update()
+    {
+        //Currently, it appears that OnClientEnterLobby() and OnStartClient() do NOT work as advertised.
+        //They seem to be inconsistently reporting the values for isLocalPlayer and slot.  For now, we will
+        //use this function instead
+        if (!setUpPlayerDone) SetupPlayer();
+    }
 
     /// <summary>
     /// 
@@ -16,15 +24,7 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
     {
         base.OnClientEnterLobby();
         Debug.Log(string.Format("OnClientEnterLobby() - local {0}  - slot {1}", isLocalPlayer.ToString(),  slot.ToString()));
-        LobbyUI.instace.AddPlayerToLobby(this);
-        if (isLocalPlayer)
-        {
-            SetupLocalPlayer();
-        }
-        else
-        {
-            SetupRemotePlayer();
-        }
+
     }
 
     /// <summary>
@@ -34,6 +34,23 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
     {
         base.OnStartClient();
         Debug.Log(string.Format("OnStartClient() - local {0}  - slot {1}", isLocalPlayer.ToString(), slot.ToString()));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void SetupPlayer()
+    {
+        setUpPlayerDone = true;
+        LobbyUI.instace.AddPlayerToLobby(this);
+        if (isLocalPlayer)
+        {
+            SetupLocalPlayer();
+        }
+        else
+        {
+            SetupRemotePlayer();
+        }
     }
 
     /// <summary>
@@ -88,11 +105,10 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
 
             Text textComponent = btnReady.transform.GetChild(0).GetComponent<Text>();
             textComponent.text = isLocalPlayer ? "JOIN" : "...";
-            textComponent.color = Color.white;
+            textComponent.color = Color.red;
             btnReady.interactable = isLocalPlayer;
         }
     }
-
-   
+    
 
 }

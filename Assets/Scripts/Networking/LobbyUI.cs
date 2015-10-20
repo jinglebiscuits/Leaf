@@ -169,27 +169,12 @@ public class LobbyUI : MonoBehaviour {
     /// </summary>
     public void AddPlayerToLobby(LeafLobbyPlayer lobbyPlayer)
     {
-        GameObject newPlayer = AddPlayerPrefabToLobby();
-        //LobbyPlayerItem playerItem = newPlayer.GetComponent<LobbyPlayerItem>();
-        //playerItem.SetLocal(true);
-        localPlayer = newPlayer;
-        //dctPlayerItems.Add(playerItem.playerId, newPlayer);
-    }
-
-    /// <summary>
-    /// Create a player item, add it to the player list in the lobby, and return a ref
-    /// </summary>
-    /// <returns></returns>
-    private GameObject AddPlayerPrefabToLobby()
-    {
-        GameObject playerItemInstance = Instantiate(playerItem, playerListContentPanel.transform.position, Quaternion.identity) as GameObject;
-        playerItemInstance.transform.SetParent(playerListContentPanel.transform);
-        RectTransform rt = playerItemInstance.GetComponent<RectTransform>();
+        lobbyPlayer.transform.SetParent(playerListContentPanel.transform);
+        RectTransform rt = lobbyPlayer.GetComponent<RectTransform>();
 
         //attempt to place the item on the surface of the ui
         rt.transform.localPosition = new Vector3(rt.transform.position.x, rt.transform.position.y, 0);
 
-        return playerItemInstance;
     }
 
     public void LoadGame()
