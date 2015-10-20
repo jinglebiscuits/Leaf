@@ -6,10 +6,15 @@ using System.Text;
 
 public class Constants
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum PlayerColors
     {
         Red,
         Blue
     }
+
+    
 }
 
