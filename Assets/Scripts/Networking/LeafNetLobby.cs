@@ -79,9 +79,17 @@ public class LeafNetLobby : NetworkLobbyManager {
         Debug.Log("OnLobbyServerSceneChanged");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="lobbyPlayer"></param>
+    /// <param name="gamePlayer"></param>
+    /// <returns></returns>
     public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer)
     {
         Debug.Log("OnLobbyServerSceneLoadedForPlayer");
+        LeafLobbyHook.instance.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
+
         return base.OnLobbyServerSceneLoadedForPlayer(lobbyPlayer, gamePlayer);
     }
 
