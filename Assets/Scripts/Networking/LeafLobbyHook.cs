@@ -24,10 +24,7 @@ public class LeafLobbyHook : MonoBehaviour {
         LeafLobbyPlayer leafLobbyPlayer = lobbyPlayer.GetComponent<LeafLobbyPlayer>();
 
         LeafGamePlayer leafGamePlayer = gamePlayer.GetComponent<LeafGamePlayer>();
-        //paddle.number = l.slot;
-        //paddle.color = l.playerColor;
-        //paddle.playerName = l.playerName;
+        leafGamePlayer.playerColor = leafLobbyPlayer.playerColor;
 
-        //PongManager.AddPlayer(paddle);
     }
 }

@@ -3,9 +3,12 @@ using System.Collections;
 
 public class LeafGamePlayer : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+    public int score { get; set; }
+    public Constants.PlayerColors playerColor { get; set; }
+
+    // Use this for initialization
+    void Start () {
+	    
 	}
 	
 	// Update is called once per frame

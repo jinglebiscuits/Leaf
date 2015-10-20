@@ -5,15 +5,11 @@ using System.Collections;
 
 public class LeafLobbyPlayer : NetworkLobbyPlayer {
 
-    public enum PlayerColors
-    {
-        Red,
-        Blue
-    }
+
 
     public Button btnReady;
     public Text txtPlayerName;
-    public PlayerColors playerColor = PlayerColors.Red;
+    public Constants.PlayerColors playerColor { get; set; }
 
     private bool setUpPlayerDone = false;
 
@@ -57,12 +53,12 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
             SetupLocalPlayer();
             if (isServer)
             {
-                playerColor = PlayerColors.Red;
+                playerColor = Constants.PlayerColors.Red;
                 txtPlayerName.text = "Red Player";
             }
             else
             {
-                playerColor = PlayerColors.Blue;
+                playerColor = Constants.PlayerColors.Blue;
                 txtPlayerName.text = "Blue Player";
             }
         }
