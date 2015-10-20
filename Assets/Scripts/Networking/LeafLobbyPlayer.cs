@@ -6,6 +6,7 @@ using System.Collections;
 public class LeafLobbyPlayer : NetworkLobbyPlayer {
 
     public Button btnReady;
+    public Text txtPlayerName;
 
     private bool setUpPlayerDone = false;
 
@@ -41,11 +42,20 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
     /// </summary>
     void SetupPlayer()
     {
+        Debug.Log(string.Format("SetupPlayer()  isServer {0}", isServer));
         setUpPlayerDone = true;
         LobbyUI.instace.AddPlayerToLobby(this);
         if (isLocalPlayer)
         {
             SetupLocalPlayer();
+            if (isServer)
+            {
+                txtPlayerName.text = "Red Player";
+            }
+            else
+            {
+                txtPlayerName.text = "Blue Player";
+            }
         }
         else
         {
