@@ -13,6 +13,15 @@ public class LeafLobbyPlayer : NetworkLobbyPlayer {
 
     private bool setUpPlayerDone = false;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    void Awake()
+    {
+        Debug.Log("LeafLobbyPlayer.Awake() - setting DontDestroyOnLoad");
+        //This had to be here to keep the lobby from destroying it before the lobby hook runs
+        DontDestroyOnLoad(transform.gameObject);
+    }
     void Update()
     {
         //Currently, it appears that OnClientEnterLobby() and OnStartClient() do NOT work as advertised.

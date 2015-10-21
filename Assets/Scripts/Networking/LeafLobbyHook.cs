@@ -21,6 +21,7 @@ public class LeafLobbyHook : MonoBehaviour {
     /// <param name="gamePlayer"></param>
     public void OnLobbyServerSceneLoadedForPlayer(UnityEngine.Networking.NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
     {
+        Debug.Log("Lobby Hook - OnLobbyServerSceneLoadedForPlayer()");
         LeafLobbyPlayer leafLobbyPlayer = lobbyPlayer.GetComponent<LeafLobbyPlayer>();
 
         LeafGamePlayer leafGamePlayer = gamePlayer.GetComponent<LeafGamePlayer>();

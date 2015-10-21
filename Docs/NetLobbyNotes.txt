@@ -1,0 +1,35 @@
+
+call stack for OnLobbyServerSceneLoadedForPlayer
+
+public override void OnServerSceneChanged(string sceneName)
+{
+	SceneLoadedForPlayer();
+}
+
+(this runs on the host)
+public override void OnStartServer()
+{
+	if ((int)this.lobbySlots.Length == 0)
+	{
+		this.lobbySlots = new NetworkLobbyPlayer[this.maxPlayers];
+	}
+	NetworkServer.RegisterHandler(43, new NetworkMessageDelegate(this.OnServerReadyToBeginMessage));
+	NetworkServer.RegisterHandler(44, new NetworkMessageDelegate(this.OnServerSceneLoadedMessage));
+	NetworkServer.RegisterHandler(46, new NetworkMessageDelegate(this.OnServerReturnToLobbyMessage));
+	this.OnLobbyStartServer();
+}
+		
+		
+(not loaded)
+private void OnServerSceneLoadedMessage(NetworkMessage netMsg)
+{
+	SceneLoadedForPlayer();
+}
+
+(not loaded)
+private void SceneLoadedForPlayer(NetworkConnection conn, GameObject lobbyPlayerGameObject)
+{
+
+	GameObject gameObject = this.OnLobbyServerCreateGamePlayer(conn, component);
+	OnLobbyServerSceneLoadedForPlayer();
+}

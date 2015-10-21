@@ -6,6 +6,7 @@ using System.Collections;
 public class LeafGamePlayer : NetworkBehaviour {
 
     public GameObject squarePrefab;
+    public GameObject gameBoard;
     public Text txtRedScore;
     public Text txtBlueScore;
     public int score { get; set; }
@@ -35,6 +36,13 @@ public class LeafGamePlayer : NetworkBehaviour {
         for (int i = 0; i < 100; i++)
         {
             GameObject sqr = (GameObject)Instantiate(squarePrefab, Vector3.zero, Quaternion.identity);
+            sqr.transform.SetParent(gameBoard.transform);
+            sqr.transform.name = "square" + i.ToString();
+            RectTransform rt = sqr.GetComponent<RectTransform>();
+
+            //attempt to place the item on the surface of the ui
+            rt.transform.localPosition = new Vector3(rt.transform.position.x, rt.transform.position.y, 0);
+
             ButtonController btnCt = sqr.GetComponent<ButtonController>();
             if (i % 2 != 0)
             {
