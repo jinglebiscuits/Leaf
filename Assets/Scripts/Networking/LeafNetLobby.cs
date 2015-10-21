@@ -19,5 +19,11 @@ public class LeafNetLobby : NetworkLobbyManager {
 
         return base.OnLobbyServerSceneLoadedForPlayer(lobbyPlayer, gamePlayer);
     }
-    
+
+    public override void OnLobbyClientSceneChanged(NetworkConnection conn)
+    {
+        base.OnLobbyClientSceneChanged(conn);
+        LobbyUI.instace.setLobbyCanvas(false);
+    }
+
 }

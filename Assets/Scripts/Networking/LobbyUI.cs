@@ -12,6 +12,8 @@ public class LobbyUI : MonoBehaviour {
     LeafNetDisc discovery = null;
     LeafNetLobby lobbyManager = null;
 
+    public GameObject lobbyCanvas;
+
     //select host or client panel
     public GameObject selectHostOrClientPanel;
 
@@ -228,6 +230,13 @@ public class LobbyUI : MonoBehaviour {
         playerListPanel.SetActive(false);
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="enabled"></param>
+    public void setLobbyCanvas(bool enabled)
+    {
+        lobbyCanvas.SetActive(enabled);
+    }
 
 }
