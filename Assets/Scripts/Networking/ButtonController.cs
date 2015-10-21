@@ -70,6 +70,20 @@ public class ButtonController : NetworkBehaviour {
     /// </summary>
     public void ButtonClickHandler()
     {
+        if (isServer)
+        {
+            UpdateButtonMode();
+        }
+        else
+        {
+            //tell the local player to tell the server to update this button
+        }
+
+
+    }
+
+    public void UpdateButtonMode()
+    {
         //Toggle button mode
         mode++;
         if (mode >= (ButtonModes)Enum.GetNames(typeof(ButtonModes)).Length) mode = 0;
