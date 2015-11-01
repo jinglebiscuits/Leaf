@@ -28,7 +28,9 @@ public class BoardManager : MonoBehaviour
     public Count puddleCount = new Count(5, 9);                      //Lower and upper limit for our random number of walls per level.
     public GameObject[] groundTiles;                                 //Array of ground prefabs.
     public GameObject[] puddleTiles;                                  //Array of puddle prefabs.
+    public GameObject[] antHillTiles;
     public GameObject tileFrame;
+    
 
     private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
     private List<Vector3> gridPositions = new List<Vector3>();   //A list of possible locations to place tiles.
@@ -128,5 +130,7 @@ public class BoardManager : MonoBehaviour
 
         //Instantiate a random number of puddle tiles based on minimum and maximum, at randomized positions.
         LayoutObjectAtRandom(puddleTiles, puddleCount.minimum, puddleCount.maximum);
+        
+        LayoutObjectAtRandom(antHillTiles, 1, 1);
     }
 }
